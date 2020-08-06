@@ -1,0 +1,16 @@
+DELIMITER $$
+
+CREAT PROCEDURE 'INSERT_UPDATE'(
+    IN _ID INT,
+    IN _Fname varchar(30),
+    IN _Lname varchar(30),
+)
+BEGIN
+IF _ID=0 THEN 
+    INSERT INTO user(Fname,Lname) VALUS (_Fname,_Lname);
+    SET _ID = LAST_INSERT_ID();
+ELSE
+    UPDATE user SET Fname=_Fname,Lname=_Lname WHERE ID=_ID;
+END IF;
+SELECT _ID AS 'ID';
+END $$
